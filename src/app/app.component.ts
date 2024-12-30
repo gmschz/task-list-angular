@@ -1,12 +1,22 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'task-list';
+  newTask: string = '';
+  tasks: { name: string; done: boolean }[] = [];
+
+  addTask() {
+    if (this.newTask.trim()) {
+      this.tasks.push({ name: this.newTask, done: false });
+      this.newTask = '';
+    }
+  }
+
+  toggleTask(task: { name: string; done: boolean }) {
+    task.done = !task.done;
+  }
 }
